@@ -1,28 +1,76 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { textSplitterIntoChar } from '@/functions';
+import gsap from 'gsap';
 import './Hero.css';
 
 export default function Hero() {
   const [whoAmI, setWhoAmI] = useState('');
+  const heroRef = useRef<HTMLElement>(null);
+  const spotlightRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const text = 'The official student chapter of ACM at NIT Surat. Fostering a culture of computing, technology, and innovation.';
     setWhoAmI(textSplitterIntoChar(text));
   }, []);
 
-  return (
-    <section id="hero" className="mb-[-100svh] py-0">
-      <div
-        className="sticky top-0 flex min-h-svh w-full pt-24 sm:pt-32"
-      >
+  useEffect(() => {
+    if (!spotlightRef.current) return;
 
+    const xTo = gsap.quickTo(spotlightRef.current, 'x', { duration: 0.8, ease: 'power3' });
+    const yTo = gsap.quickTo(spotlightRef.current, 'y', { duration: 0.8, ease: 'power3' });
+
+    const handleMouseMove = (e: MouseEvent) => {
+      if (!heroRef.current) return;
+      const rect = heroRef.current.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      
+      xTo(x);
+      yTo(y);
+    };
+
+    const hero = heroRef.current;
+    if (hero) {
+      hero.addEventListener('mousemove', handleMouseMove);
+    }
+    return () => {
+      if (hero) {
+        hero.removeEventListener('mousemove', handleMouseMove);
+      }
+    };
+  }, []);
+
+  return (
+    <section id="hero" ref={heroRef} className="mb-[-100svh] py-0 relative">
+      <div
+        className="sticky top-0 flex min-h-svh w-full pt-24 sm:pt-32 hero-gradient-bg"
+      >
         <div className="absolute inset-0 overflow-hidden z-0 pointer-events-none opacity-80">
+          {/* Grid lines */}
+          <div className="absolute inset-0 bg-grid"></div>
+
+          {/* Spotlight layer (Motion Trail) */}
+          <div 
+            ref={spotlightRef}
+            className="absolute size-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full blur-3xl"
+            style={{ 
+              top: 0, 
+              left: 0,
+              background: 'radial-gradient(circle, rgba(14, 165, 233, 0.3) 0%, transparent 70%)'
+            }}
+          />
+
+          {/* Vignette Effect */}
+          <div className="absolute inset-0 pointer-events-none" style={{
+            background: 'radial-gradient(circle at center, transparent 50%, rgba(56, 57, 46, 0.25) 100%)'
+          }} />
+          
           {/* Floating Orb 1 */}
-          <div className="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] max-w-[600px] max-h-[600px] bg-[#0ea5e9]/10 rounded-full mix-blend-multiply filter blur-[80px] animate-blob"></div>
+          <div className="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] max-w-[600px] max-h-[600px] bg-[#0ea5e9]/15 rounded-full mix-blend-multiply filter blur-[80px] animate-blob"></div>
           {/* Floating Orb 2 */}
-          <div className="absolute top-[20%] right-[-10%] w-[45vw] h-[45vw] max-w-[500px] max-h-[500px] bg-flax-smoke-300/40 rounded-full mix-blend-multiply filter blur-[80px] animate-blob animation-delay-2000"></div>
+          <div className="absolute top-[20%] right-[-10%] w-[45vw] h-[45vw] max-w-[500px] max-h-[500px] bg-flax-smoke-300/50 rounded-full mix-blend-multiply filter blur-[80px] animate-blob animation-delay-2000"></div>
           {/* Floating Orb 3 */}
-          <div className="absolute bottom-[-20%] left-[20%] w-[60vw] h-[60vw] max-w-[700px] max-h-[700px] bg-[#0ea5e9]/10 rounded-full mix-blend-multiply filter blur-[80px] animate-blob animation-delay-4000"></div>
+          <div className="absolute bottom-[-20%] left-[20%] w-[60vw] h-[60vw] max-w-[700px] max-h-[700px] bg-[#0ea5e9]/15 rounded-full mix-blend-multiply filter blur-[80px] animate-blob animation-delay-4000"></div>
         </div>
 
         <div className="relative flex w-full h-full flex-col items-center justify-start md:justify-center z-10 text-center gap-8 px-4 md:pb-[40vh]">
@@ -33,7 +81,7 @@ export default function Hero() {
                 {['ACM', 'NIT', 'SURAT'].map((word, wIdx) => (
                   <div key={wIdx} className="flex overflow-hidden">
                     {word.split('').map((char, cIdx) => (
-                      <span key={char + cIdx} className="hero-title-char translate-y-[120%] will-change-transform block text-flax-smoke-900 drop-shadow-sm">
+                      <span key={char + cIdx} className="hero-title-char translate-y-[120%] will-change-transform block text-flax-smoke-900 drop-shadow-sm hover:text-[#0ea5e9] transition-colors duration-300">
                         {char}
                       </span>
                     ))}
@@ -72,3 +120,5 @@ export default function Hero() {
     </section>
   );
 }
+
+
