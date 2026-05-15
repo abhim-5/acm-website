@@ -194,7 +194,7 @@ export default function Community() {
                   </h3>
                 </div>
                 
-                <div className="p-6 md:p-8 overflow-y-auto flex-grow custom-scrollbar">
+                <div className="p-6 md:p-8 overflow-y-auto flex-grow custom-scrollbar" data-lenis-prevent>
                   <form onSubmit={handleSubmit} id="contact-form" className="flex flex-col gap-8" noValidate>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                       <div className="flex flex-col gap-1">
