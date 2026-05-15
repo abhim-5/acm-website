@@ -6,7 +6,7 @@ import tailwindcss from '@tailwindcss/vite';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: '/acm/',
+  base: '/',
   build: {
     sourcemap: true,
     // terserOptions:
