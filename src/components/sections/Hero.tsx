@@ -1,12 +1,11 @@
 import { useEffect, useState, useRef } from 'react';
 import { textSplitterIntoChar } from '@/functions';
-import gsap from 'gsap';
 import './Hero.css';
 
 export default function Hero() {
   const [whoAmI, setWhoAmI] = useState('');
   const heroRef = useRef<HTMLElement>(null);
-  const spotlightRef = useRef<HTMLDivElement>(null);
+  const logoContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const text = 'The official student chapter of ACM at NIT Surat. Fostering a culture of computing, technology, and innovation.';
@@ -14,19 +13,14 @@ export default function Hero() {
   }, []);
 
   useEffect(() => {
-    if (!spotlightRef.current) return;
-
-    const xTo = gsap.quickTo(spotlightRef.current, 'x', { duration: 0.8, ease: 'power3' });
-    const yTo = gsap.quickTo(spotlightRef.current, 'y', { duration: 0.8, ease: 'power3' });
-
     const handleMouseMove = (e: MouseEvent) => {
-      if (!heroRef.current) return;
-      const rect = heroRef.current.getBoundingClientRect();
+      if (!logoContainerRef.current) return;
+      const rect = logoContainerRef.current.getBoundingClientRect();
       const x = e.clientX - rect.left;
       const y = e.clientY - rect.top;
       
-      xTo(x);
-      yTo(y);
+      logoContainerRef.current.style.setProperty('--mouse-x', `${x}px`);
+      logoContainerRef.current.style.setProperty('--mouse-y', `${y}px`);
     };
 
     const hero = heroRef.current;
@@ -49,21 +43,38 @@ export default function Hero() {
           {/* Grid lines */}
           <div className="absolute inset-0 bg-grid"></div>
 
-          {/* Spotlight layer (Motion Trail) */}
-          <div 
-            ref={spotlightRef}
-            className="absolute size-[600px] -translate-x-1/2 -translate-y-1/2 rounded-full blur-3xl"
-            style={{ 
-              top: 0, 
-              left: 0,
-              background: 'radial-gradient(circle, rgba(14, 165, 233, 0.3) 0%, transparent 70%)'
-            }}
-          />
-
           {/* Vignette Effect */}
           <div className="absolute inset-0 pointer-events-none" style={{
             background: 'radial-gradient(circle at center, transparent 50%, rgba(56, 57, 46, 0.25) 100%)'
           }} />
+
+          {/* Logo Container with Highlight Effect */}
+          <div 
+            ref={logoContainerRef}
+            className="absolute size-[600px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none z-0"
+          >
+            {/* Base Logo (More Prominent) */}
+            <img
+              src="/logo.png"
+              alt="ACM Logo BG Dim"
+              className="absolute inset-0 size-full opacity-35 mix-blend-multiply"
+              style={{ 
+                maskImage: 'radial-gradient(circle, black 40%, transparent 70%)',
+                WebkitMaskImage: 'radial-gradient(circle, black 40%, transparent 70%)'
+              }}
+            />
+
+            {/* Highlight Logo (Ultra Highlight) */}
+            <img
+              src="/logo.png"
+              alt="ACM Logo BG Highlight"
+              className="absolute inset-0 size-full opacity-95 mix-blend-multiply"
+              style={{ 
+                maskImage: 'radial-gradient(180px circle at var(--mouse-x, -1000px) var(--mouse-y, -1000px), black 30%, transparent 100%)',
+                WebkitMaskImage: 'radial-gradient(180px circle at var(--mouse-x, -1000px) var(--mouse-y, -1000px), black 30%, transparent 100%)'
+              }}
+            />
+          </div>
           
           {/* Floating Orb 1 */}
           <div className="absolute top-[-10%] left-[-10%] w-[50vw] h-[50vw] max-w-[600px] max-h-[600px] bg-[#0ea5e9]/15 rounded-full mix-blend-multiply filter blur-[80px] animate-blob"></div>
