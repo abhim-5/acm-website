@@ -6,7 +6,7 @@
     <!-- Section Header -->
     <div class="border-black/20 w-full border-b-[1px] pb-[clamp(2rem,2vw_+_1rem,3rem)] mb-16 md:mb-24 flex justify-center text-center">
       <h3 class="heading-1 max-sm:heading-2 text-[#1a1a1a] leading-none font-black uppercase tracking-tight">
-        What they say about us /
+        What they say about us
       </h3>
     </div>
 
@@ -62,7 +62,7 @@
           <div class="bg-[#0B0B0A] border border-flax-smoke-800/50 rounded-2xl shadow-2xl w-full max-w-3xl flex flex-col max-h-[90vh] relative overflow-hidden">
             
             <!-- Close button -->
-            <button @click="closeModal" class="absolute top-4 right-4 text-flax-smoke-500 hover:text-white transition-colors p-2 z-20">
+            <button @click="closeModal" class="absolute top-4 left-4 md:left-auto md:right-4 text-flax-smoke-500 hover:text-white transition-colors p-2 z-20">
               <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
             </button>
 

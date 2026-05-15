@@ -140,7 +140,7 @@
     return useWindowSize().width.value < 768;
   });
   const index = ref(0);
-  const selectedWorks = ref('ACM Events /');
+  const selectedWorks = ref('ACM Events');
 
   const tl = gsap
     .timeline({ defaults: { duration: 0.25 } })
@@ -309,7 +309,7 @@
     });
   };
   onBeforeMount(() => {
-    selectedWorks.value = textSplitterIntoChar('ACM Events / ', true);
+    selectedWorks.value = textSplitterIntoChar('ACM Events', true);
   });
 
   onMounted(() => {

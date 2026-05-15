@@ -89,9 +89,12 @@ acm/
 
 | **Domain** | **Technologies / Frameworks / Tools** |
 |---|---|
-| **Frontend** | Vue 3 (Composition API), TypeScript, Tailwind CSS v4, HTML5, CSS3, Vite 6 |
-| **DevOps** | Git, GitHub Actions, Vite Build, vite-plugin-sitemap, vite-plugin-robots |
-| **Other** | GSAP 3 + ScrollTrigger, Lenis Smooth Scroll, Flubber (SVG morphing)|
+| **Frontend** | JavaScript, React, Tailwind CSS, HTML5, CSS3 |
+| **Backend** | Node.js, Express, REST APIs |
+| **AI** | Gemini API, OpenAI API, Prompt Engineering |
+| **ML** | Python, NumPy, Pandas, Scikit-learn, Matplotlib |
+| **DevOps** | Git, GitHub Actions, Vercel |
+| **Other** | GSAP 3, Lenis Smooth Scroll, UI/UX Design |
 
 ---
 

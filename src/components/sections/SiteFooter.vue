@@ -1,10 +1,10 @@
 <template>
   <section
     id="contact-section"
-    class="relative min-h-svh w-full overflow-y-clip p-[4vh] select-none"
+    class="relative min-h-svh w-full overflow-y-clip p-0 md:p-[4vh] select-none"
   >
     <div
-      class="flex-center relative min-h-[92vh] w-full flex-col rounded-lg bg-black text-flax-smoke-50 overflow-hidden"
+      class="flex-center relative min-h-svh md:min-h-[92vh] w-full flex-col rounded-none md:rounded-lg bg-black text-flax-smoke-50 overflow-hidden"
     >
       <video
         class="absolute bottom-0 left-0 size-full rounded-lg object-cover object-bottom brightness-[0.25]"
