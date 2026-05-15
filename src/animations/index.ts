@@ -1,8 +1,8 @@
 import gsap from 'gsap';
 import MotionPathHelper from 'gsap/MotionPathPlugin';
 import ScrollTrigger from 'gsap/ScrollTrigger';
-import { Ref } from 'vue';
 import { lenis } from '@/main';
+
 
 gsap.registerPlugin(ScrollTrigger);
 gsap.registerPlugin(MotionPathHelper);
@@ -104,38 +104,36 @@ const resetOpacity = (id: string, opacity: number = 0) => {
 // ! Magneto effects
 const activateMagneto = (
   event: MouseEvent,
-  magneto: Ref<HTMLElement>,
-  magnetoText: Ref<HTMLElement>,
+  magneto: HTMLElement,
+  magnetoText: HTMLElement,
   magnetoStrengthVal: number,
   magnetoTextStrengthVal: number,
 ) => {
-  const xDivTo = gsap.quickTo(magneto.value, 'x', {
+  const xDivTo = gsap.quickTo(magneto, 'x', {
     duration: 1,
     ease: 'elastic.out(1, 0.3)',
   });
-  const xTextTo = gsap.quickTo(magnetoText.value, 'x', {
+  const xTextTo = gsap.quickTo(magnetoText, 'x', {
     duration: 1,
     ease: 'elastic.out(1, 0.3)',
   });
 
-  const yTextTo = gsap.quickTo(magnetoText.value, 'y', {
+  const yTextTo = gsap.quickTo(magnetoText, 'y', {
     duration: 1,
     ease: 'elastic.out(1, 0.3)',
   });
-  const yDivTo = gsap.quickTo(magneto.value, 'y', {
+  const yDivTo = gsap.quickTo(magneto, 'y', {
     duration: 1,
     ease: 'elastic.out(1, 0.3)',
   });
 
   const { clientX, clientY } = event;
-  const { width, height, left, top } = magneto.value.getBoundingClientRect();
+  const { width, height, left, top } = magneto.getBoundingClientRect();
 
   const magnetoStrength = magnetoStrengthVal;
   const magnetoTextStrength = magnetoTextStrengthVal;
   const newX = ((clientX - left) / width - 0.5) * magnetoStrength;
   const newY = ((clientY - top) / height - 0.5) * magnetoTextStrength;
-  // const newX = clientX - (left + width / 2);
-  // const newY = clientY - (top + height / 2);
 
   // move the magneto
   xDivTo(newX);
@@ -147,23 +145,23 @@ const activateMagneto = (
 };
 
 const resetMagneto = (
-  magneto: Ref<HTMLElement>,
-  magnetoText: Ref<HTMLElement>,
+  magneto: HTMLElement,
+  magnetoText: HTMLElement,
 ) => {
-  const xDivTo = gsap.quickTo(magneto.value, 'x', {
+  const xDivTo = gsap.quickTo(magneto, 'x', {
     duration: 1,
     ease: 'elastic.out(1, 0.3)',
   });
-  const xTextTo = gsap.quickTo(magnetoText.value, 'x', {
+  const xTextTo = gsap.quickTo(magnetoText, 'x', {
     duration: 1,
     ease: 'elastic.out(1, 0.3)',
   });
 
-  const yTextTo = gsap.quickTo(magnetoText.value, 'y', {
+  const yTextTo = gsap.quickTo(magnetoText, 'y', {
     duration: 1,
     ease: 'elastic.out(1, 0.3)',
   });
-  const yDivTo = gsap.quickTo(magneto.value, 'y', {
+  const yDivTo = gsap.quickTo(magneto, 'y', {
     duration: 1,
     ease: 'elastic.out(1, 0.3)',
   });

@@ -1,6 +1,6 @@
-import MenuToggle from './MenuToggle.vue';
-import Link from './Link.vue';
-import MagneticEffect from './MagneticEffect.vue';
-import AboutCard from './AboutCard.vue';
+import MenuToggle from './MenuToggle';
+import Link from './Link';
+import MagneticEffect from './MagneticEffect';
+import AboutCard from './AboutCard';
 
 export { Link, MagneticEffect, MenuToggle, AboutCard };

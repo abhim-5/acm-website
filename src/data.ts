@@ -13,7 +13,8 @@ const navLinks = [
 ];
 
 const navbarLinks = [
-  { label: 'Home', url: '#app' },
+  { label: 'Home', url: '#hero' },
+
   ...navLinks,
 ];
 
